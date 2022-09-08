@@ -15,24 +15,28 @@ export function createAutocompleteStore<T = any>(
   items: T[],
   matcher: Matcher<T>
 ): UnwrapNestedRefs<Store<T>> {
-  return reactive<Store<T>>({
+  const state = reactive<Store<T>>({
     selectedItems: [],
     availableItemsToSelect: [],
     search(searchTerm: string) {
       if (searchTerm.length < MIN_CHARACTERS_LENGTH_TO_SEARCH) {
-        this.availableItemsToSelect = [];
+        state.availableItemsToSelect = [];
         return;
       }
 
-      this.availableItemsToSelect = items.filter(matcher(searchTerm));
+      state.availableItemsToSelect = items.filter(
+        matcher(searchTerm)
+      ) as typeof state.availableItemsToSelect;
     },
     setSelectedItems(selectedBooks: T[]) {
-      this.selectedItems = selectedBooks;
+      state.selectedItems = selectedBooks as typeof state.selectedItems;
     },
     removeItem(removedBook: T) {
-      this.selectedItems = this.selectedItems.filter(
+      state.selectedItems = state.selectedItems.filter(
         (book) => book !== removedBook
       );
     },
   });
+
+  return state;
 }
