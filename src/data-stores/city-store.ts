@@ -7,6 +7,7 @@ export const cityStore = reactive<{
   availableOptions: City[];
   onTextChange: (inputText: string) => void;
   onSelectedCitiesChange: (newSelectedCities: City[]) => void;
+  onRemoveCity: (removedCity: City) => void;
 }>({
   selectedCities: [],
   availableOptions: [],
@@ -22,5 +23,10 @@ export const cityStore = reactive<{
   },
   onSelectedCitiesChange(newSelectedCities: City[]) {
     cityStore.selectedCities = newSelectedCities;
+  },
+  onRemoveCity(removedBook: City) {
+    cityStore.selectedCities = cityStore.selectedCities.filter(
+      (city) => city !== removedBook
+    );
   },
 });

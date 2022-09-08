@@ -8,6 +8,7 @@ import AutoComplete from "./AutoComplete.vue";
   <AutoComplete
     @on-text-change="cityStore.onTextChange"
     @on-change="cityStore.onSelectedCitiesChange"
+    @on-remove-option="cityStore.onRemoveCity"
     :available-options="cityStore.availableOptions"
     :selected-options="cityStore.selectedCities"
     :min-length="MIN_CHARACTERS_LENGTH_TO_SEARCH"
