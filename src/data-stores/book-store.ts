@@ -7,6 +7,7 @@ export const bookStore = reactive<{
   availableOptions: Book[];
   onTextChange: (inputText: string) => void;
   onSelectedBooksChange: (newSelectedBooks: Book[]) => void;
+  onRemoveBook: (removedBook: Book) => void;
 }>({
   selectedBooks: [],
   availableOptions: [],
@@ -22,5 +23,10 @@ export const bookStore = reactive<{
   },
   onSelectedBooksChange(newSelectedBooks: Book[]) {
     bookStore.selectedBooks = newSelectedBooks;
+  },
+  onRemoveBook(removedBook: Book) {
+    bookStore.selectedBooks = bookStore.selectedBooks.filter(
+      (book) => book !== removedBook
+    );
   },
 });
