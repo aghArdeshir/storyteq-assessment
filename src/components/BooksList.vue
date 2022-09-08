@@ -20,12 +20,21 @@ function onTextChange(inputText: string) {
     book.title.toLowerCase().includes(inputText.toLowerCase())
   );
 }
+
+function onSelectedBooksChange(newSelectedBooks: Book[]) {
+  state.selectedBooks = newSelectedBooks;
+}
 </script>
 
 <template>
   <AutoComplete
     @on-text-change="onTextChange"
+    @on-change="onSelectedBooksChange"
     :available-options="state.availableOptions"
     :selected-options="state.selectedBooks"
-  />
+  >
+    <template #checkbox-label="{ option: book }"
+      >{{ book.title }} <small>by</small> <em>{{ book.author }}</em></template
+    >
+  </AutoComplete>
 </template>
