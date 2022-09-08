@@ -33,6 +33,7 @@ function onSelectedBooksChange(newSelectedBooks: Book[]) {
     :available-options="state.availableOptions"
     :selected-options="state.selectedBooks"
     :min-length="MIN_CHARACTERS_LENGTH_TO_SEARCH"
+    placeholder="search for books..."
   >
     <template #checkbox-label="{ option: book }"
       >{{ book.title }} <small>by</small> <em>{{ book.author }}</em></template

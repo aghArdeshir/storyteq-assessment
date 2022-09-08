@@ -14,6 +14,7 @@ const props = defineProps<{
   availableOptions: any[];
   selectedOptions: any[];
   minLength: number;
+  placeholder: string;
 }>();
 
 const state = reactive<{ inputText: string; internal_selectedOptions: any[] }>({
@@ -41,7 +42,12 @@ const noMatchFound = computed(
 </script>
 
 <template>
-  <input v-model="state.inputText" @input="onInputTextChange" autofocus />
+  <input
+    v-model="state.inputText"
+    @input="onInputTextChange"
+    autofocus
+    :placeholder="props.placeholder"
+  />
 
   <div v-if="state.inputText.length < props.minLength">
     Write at least {{ props.minLength }} characters to start searching
