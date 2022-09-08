@@ -13,7 +13,7 @@ describe("Cities List", () => {
     );
   });
 
-  it("Removing a chip removes it from store", () => {
+  it("Removing a chip removes it from store (kinda integration test)", () => {
     cityStore.setSelectedItems(["one"]);
     const wrapper = mount(CitiesListVue);
     const deleteButton = wrapper.get("button");
