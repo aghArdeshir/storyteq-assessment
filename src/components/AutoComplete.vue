@@ -13,6 +13,7 @@ const emit = defineEmits<{
 const props = defineProps<{
   availableOptions: any[];
   selectedOptions: any[];
+  minLength: number;
 }>();
 
 const state = reactive<{ inputText: string; internal_selectedOptions: any[] }>({
@@ -35,6 +36,11 @@ function onSelectedOptionsChange() {
 
 <template>
   <input v-model="state.inputText" @input="onInputTextChange" autofocus />
+
+  <div v-if="state.inputText.length < props.minLength">
+    Write at least {{ props.minLength }} characters to start searching
+  </div>
+
   <ul>
     <li v-for="option in props.availableOptions" :key="option">
       <label>
