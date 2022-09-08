@@ -6,11 +6,11 @@ import { MIN_CHARACTERS_LENGTH_TO_SEARCH } from "@/constants/constants";
 
 <template>
   <AutoComplete
-    @on-text-change="bookStore.onTextChange"
-    @on-change="bookStore.onSelectedBooksChange"
-    @on-remove-option="bookStore.onRemoveBook"
-    :available-options="bookStore.availableOptions"
-    :selected-options="bookStore.selectedBooks"
+    @on-text-change="bookStore.search"
+    @on-change="bookStore.setSelectedItems"
+    @on-remove-option="bookStore.removeItem"
+    :available-options="bookStore.availableItemsToSelect"
+    :selected-options="bookStore.selectedItems"
     :min-length="MIN_CHARACTERS_LENGTH_TO_SEARCH"
     placeholder="search for books..."
   >
