@@ -6,11 +6,11 @@ import AutoComplete from "./AutoComplete.vue";
 
 <template>
   <AutoComplete
-    @on-text-change="cityStore.onTextChange"
-    @on-change="cityStore.onSelectedCitiesChange"
-    @on-remove-option="cityStore.onRemoveCity"
-    :available-options="cityStore.availableOptions"
-    :selected-options="cityStore.selectedCities"
+    @on-text-change="cityStore.search"
+    @on-change="cityStore.setSelectedItems"
+    @on-remove-option="cityStore.removeItem"
+    :available-options="cityStore.availableItemsToSelect"
+    :selected-options="cityStore.selectedItems"
     :min-length="MIN_CHARACTERS_LENGTH_TO_SEARCH"
     placeholder="search for cities..."
   />
