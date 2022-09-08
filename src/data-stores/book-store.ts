@@ -1,7 +1,6 @@
+import { MIN_CHARACTERS_LENGTH_TO_SEARCH } from "@/constants/constants";
 import { reactive } from "vue";
 import { books, type Book } from "../constants/db";
-
-export const MIN_CHARACTERS_LENGTH_TO_SEARCH = 3;
 
 export const bookStore = reactive<{
   selectedBooks: Book[];

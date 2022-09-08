@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import AutoComplete from "./AutoComplete.vue";
-import {
-  bookStore,
-  MIN_CHARACTERS_LENGTH_TO_SEARCH,
-} from "@/data-stores/book-store";
+import { bookStore } from "@/data-stores/book-store";
+import { MIN_CHARACTERS_LENGTH_TO_SEARCH } from "@/constants/constants";
 </script>
 
 <template>
