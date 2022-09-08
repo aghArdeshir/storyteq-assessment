@@ -1,5 +1,7 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import BooksList from "./components/BooksList.vue";
+</script>
 
 <template>
-  <h1>hello world</h1>
+  <BooksList />
 </template>
