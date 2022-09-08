@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, watch } from "vue";
+import { computed, reactive, watch } from "vue";
 
 const emit = defineEmits<{
   // disabling eslint because I don't know why it is complaining! it shouldn't!
@@ -32,6 +32,12 @@ function onInputTextChange() {
 function onSelectedOptionsChange() {
   emit("onChange", state.internal_selectedOptions);
 }
+
+const noMatchFound = computed(
+  () =>
+    props.availableOptions.length === 0 &&
+    state.inputText.length >= props.minLength
+);
 </script>
 
 <template>
@@ -42,6 +48,8 @@ function onSelectedOptionsChange() {
   </div>
 
   <ul>
+    <li v-if="noMatchFound">No matches found! Try another search term</li>
+
     <li v-for="option in props.availableOptions" :key="option">
       <label>
         <input
