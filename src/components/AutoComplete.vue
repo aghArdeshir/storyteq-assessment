@@ -20,9 +20,14 @@ const props = defineProps<{
   placeholder: string;
 }>();
 
-const state = reactive<{ inputText: string; internal_selectedOptions: any[] }>({
+const state = reactive<{
+  inputText: string;
+  internal_selectedOptions: any[];
+  popupIsOpen: boolean;
+}>({
   inputText: "",
   internal_selectedOptions: [],
+  popupIsOpen: false,
 });
 
 watch(props, (newValue) => {
@@ -43,14 +48,24 @@ const noMatchFound = computed(
     state.inputText.length >= props.minLength
 );
 
+watch([noMatchFound, props], ([_noMatchFound, _props]) => {
+  if (!!_noMatchFound || _props.availableOptions.length) {
+    state.popupIsOpen = true;
+  }
+});
+
 function onRemoveOption(removedOption: any) {
   emit("onRemoveOption", removedOption);
 }
 
 function onKeydown(e: KeyboardEvent) {
   if (e.key === "Escape") {
-    console.log("ESCAPE PRESSED");
+    state.popupIsOpen = false;
   }
+}
+
+function onInputFocus() {
+  if (state.inputText.length >= props.minLength){ state.popupIsOpen = true;}
 }
 </script>
 
@@ -77,6 +92,7 @@ function onKeydown(e: KeyboardEvent) {
         type="text"
         v-model="state.inputText"
         @input="onInputTextChange"
+        @focus="onInputFocus"
         autofocus
         :placeholder="props.placeholder"
       />
@@ -86,7 +102,7 @@ function onKeydown(e: KeyboardEvent) {
       Write at least {{ props.minLength }} characters to start searching
     </div>
 
-    <ul class="autocomplete-popup">
+    <ul class="autocomplete-popup" v-if="state.popupIsOpen">
       <li v-if="noMatchFound">No matches found! Try another search term</li>
 
       <li v-for="option in props.availableOptions" :key="option">
