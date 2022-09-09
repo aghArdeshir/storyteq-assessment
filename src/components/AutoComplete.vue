@@ -2,28 +2,30 @@
 import { computed, reactive, watch } from "vue";
 import { OnClickOutside } from "@vueuse/components";
 
+type Option = any; // any, because I don't know how to template type a component
+
 const emit = defineEmits<{
   // disabling eslint because I don't know why it is complaining! it shouldn't!
   // eslint-disable-next-line no-unused-vars
   (e: "onTextChange", inputText: string): void;
   // disabling eslint because I don't know why it is complaining! it shouldn't!
   // eslint-disable-next-line no-unused-vars
-  (e: "onChange", selectedOptions: any[]): void;
+  (e: "onChange", selectedOptions: Option[]): void;
   // disabling eslint because I don't know why it is complaining! it shouldn't!
   // eslint-disable-next-line no-unused-vars
-  (e: "onRemoveOption", rmeovedOption: any): void;
+  (e: "onRemoveOption", rmeovedOption: Option): void;
 }>();
 
 const props = defineProps<{
-  availableOptions: any[];
-  selectedOptions: any[];
+  availableOptions: Option[];
+  selectedOptions: Option[];
   minLength: number;
   placeholder: string;
 }>();
 
 const state = reactive<{
   inputText: string;
-  internal_selectedOptions: any[];
+  internal_selectedOptions: Option[];
   popupIsOpen: boolean;
 }>({
   inputText: "",
@@ -31,8 +33,30 @@ const state = reactive<{
   popupIsOpen: false,
 });
 
-watch(props, (newValue) => {
-  state.internal_selectedOptions = newValue.selectedOptions;
+function openPopup() {
+  state.popupIsOpen = true;
+}
+
+function closePopup() {
+  state.popupIsOpen = false;
+}
+
+const noMatchFound = computed(
+  () =>
+    props.availableOptions.length === 0 &&
+    state.inputText.length >= props.minLength
+);
+
+watch([noMatchFound, props], ([_noMatchFound, _props]) => {
+  // we need this to open popup, because popupIsOpen is a highly controlled state
+  if (!!_noMatchFound || _props.availableOptions.length) {
+    openPopup();
+  }
+});
+
+watch(props, (newProps) => {
+  // to update selected options from outside
+  state.internal_selectedOptions = newProps.selectedOptions;
 });
 
 function onInputTextChange() {
@@ -43,36 +67,24 @@ function onSelectedOptionsChange() {
   emit("onChange", state.internal_selectedOptions);
 }
 
-const noMatchFound = computed(
-  () =>
-    props.availableOptions.length === 0 &&
-    state.inputText.length >= props.minLength
-);
-
-watch([noMatchFound, props], ([_noMatchFound, _props]) => {
-  if (!!_noMatchFound || _props.availableOptions.length) {
-    state.popupIsOpen = true;
-  }
-});
-
-function onRemoveOption(removedOption: any) {
+function onRemoveOption(removedOption: Option) {
   emit("onRemoveOption", removedOption);
 }
 
 function onKeydown(e: KeyboardEvent) {
   if (e.key === "Escape") {
-    state.popupIsOpen = false;
+    closePopup();
   }
 }
 
 function onInputFocus() {
   if (state.inputText.length >= props.minLength) {
-    state.popupIsOpen = true;
+    openPopup();
   }
 }
 
 function onClickOutside() {
-  state.popupIsOpen = false;
+  closePopup();
 }
 </script>
 
