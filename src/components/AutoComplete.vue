@@ -160,7 +160,9 @@ function onClickOutside() {
   color: white;
   border-radius: 50%;
   margin-left: 10px;
-  cursor: button;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
 }
 
 input[type="text"] {

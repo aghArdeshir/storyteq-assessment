@@ -1,8 +1,8 @@
-import { cities, type City } from "@/constants/db";
+import { cities, type City } from "@/constants/cities-db";
 import { createAutocompleteStore } from "./store-builder";
 
 export const cityStore = createAutocompleteStore<City>(
   cities,
-  (searchTerm) => (item) =>
-    item.toLowerCase().includes(searchTerm.toLowerCase())
+  (searchTerm) => (city) =>
+    city.toLowerCase().includes(searchTerm.toLowerCase())
 );

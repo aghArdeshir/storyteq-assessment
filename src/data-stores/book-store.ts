@@ -1,4 +1,4 @@
-import { books, type Book } from "../constants/db";
+import { books, type Book } from "../constants/books-db";
 import { createAutocompleteStore } from "./store-builder";
 
 export const bookStore = createAutocompleteStore<Book>(
