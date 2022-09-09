@@ -127,6 +127,7 @@ input[type="text"] {
 }
 
 .autocomplete-wrapper {
+  position: relative;
   font-size: 20px;
 }
 
@@ -139,6 +140,12 @@ input[type="text"] {
   border-bottom: 1px solid gray;
 }
 
+@media (min-width: 1000px) {
+  .chips-and-input {
+    min-width: 500px;
+  }
+}
+
 .chips-and-input input {
   border: none;
   background-color: transparent;
@@ -149,5 +156,7 @@ input[type="text"] {
 .autocomplete-popup {
   background-color: blueviolet;
   box-shadow: 0px 0px 8px black;
+  position: absolute;
+  width: 100%;
 }
 </style>
