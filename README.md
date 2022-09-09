@@ -12,7 +12,7 @@
 ## Development, code and application (and excuses)
 
 - I did **not** use TDD mainly because I was unfamiliar with vue and was doing more of an exploration or prototyping with lots of trials and error. So most of the tests are written after development and manually testing the functionality. (I don't think TDD is a good option for prototyping and early stages of development)
-- I tried a little to work on accessibilty (like closing list with escape, on click outside, on focus, etc...). It is still is buggy, I left it uncomplete for the sake of simplicity ant time
+- I tried a little to work on accessibilty (like closing list with escape, on click outside, on focus, etc...). It is still is buggy, I left it uncomplete for the sake of simplicity ant time.
 - technologies and libraries used:
 - - `vue`, well ...
 - - `vitest` for test
@@ -23,9 +23,10 @@
 - I used `any` a lot as type inside `Autocomplete` because I didn't know how to define type templates for components and also didn't want to go too deep into how to do it for the sake of time and simplicity
 - `Chips` should have been a separate component (from clean-code point of view), but I didn't do it
 - Did not work much on mobile view for the sake of time & simplicity
+- I'm not sure if it was a wise choice to keep availableItems (based on user search) in the store. I'd rather it be a one way data flow: allBooks -> userSearch -> filteredBooks (options). But I just got along with it.
 - Last, but not least, I'm not fluent in vue and I don't know its design patterns. This is not my best! :)
+
 # TODO
 
-- instead of `any` in AutoComplete, see if there is any possible way to use type templates on vue components
 - Is it a correct decision to have available options as a state? It does not seem like a wise decision. Check if there is any other workaround
 - Put the whole README.md into grammarly
