@@ -12,7 +12,7 @@ Build a Vue.js application that lets users search for a cities and books in a pr
 - [x] Use some type of data store to store the results that your components will consume.
 - [x] You can use any approach for getting the store state into your components. The **important part is that you use one or more stores to store your datasets and query results.**
 - [x] There should be two autocompletes on the final page, one for the `cities` and one for `books`. The `books` autocomplete should show primarily the book title and secondarily the author for every matched result.
-- [ ] Include at least three unit tests. You can select the units of code to test based on what you find most important. You are free to use any testing framework of choice.
+- [x] Include at least three unit tests. You can select the units of code to test based on what you find most important. You are free to use any testing framework of choice.
 - [x] For the `cities` autocomplete, search through this list for approximate matches. For example, if the user enters `san`, it should match `san`, `santiago`, `san francisco`, `santa rosa`, etc. If they enter `sant`, it should only match `santiago` and `santa rosa`.
 - [x] For the `books` autocomplete, search through the list of `book.title`s. For example, if the user enters `don` it should show a suggestion for 'Don Quixote'.
 
