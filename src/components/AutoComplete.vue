@@ -110,7 +110,7 @@ function onClickOutside() {
         Write at least {{ props.minLength }} characters to start searching
       </div>
 
-      <ul class="autocomplete-popup" v-if="state.popupIsOpen">
+      <ul class="autocomplete-popup" v-show="state.popupIsOpen">
         <li v-if="noMatchFound">No matches found! Try another search term</li>
 
         <li v-for="option in props.availableOptions" :key="option">
