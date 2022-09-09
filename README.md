@@ -25,3 +25,5 @@
 - Did not work much on mobile view for the sake of time & simplicity (Just did a simple vertical/horizontal layout on mobile/desktop)
 - I'm not sure if it was a wise choice to keep `availableItems` (based on user search) in the store. I'd rather it be a one-way data flow: all books -> user search -> filtered books (options). But I just got along with it.
 - Last, but not least, I'm not fluent in vue and I don't know its design patterns and best practices. This is not my best! :)
+
+The total time consumed for this assignment solely is 2 evenings, between 4 & 5 hours
