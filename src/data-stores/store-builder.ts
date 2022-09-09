@@ -11,13 +11,14 @@ type Store<T> = {
 
 type Matcher<T> = (searchTerm: string) => (item: T) => boolean;
 
-export function createAutocompleteStore<T = any>(
+export function createAutocompleteStore<T>(
   items: T[],
   matcher: Matcher<T>
 ): UnwrapNestedRefs<Store<T>> {
   const state = reactive<Store<T>>({
     selectedItems: [],
     availableItemsToSelect: [],
+
     search(searchTerm: string) {
       if (searchTerm.length < MIN_CHARACTERS_LENGTH_TO_SEARCH) {
         state.availableItemsToSelect = [];
@@ -28,9 +29,11 @@ export function createAutocompleteStore<T = any>(
         matcher(searchTerm)
       ) as typeof state.availableItemsToSelect;
     },
+
     setSelectedItems(selectedBooks: T[]) {
       state.selectedItems = selectedBooks as typeof state.selectedItems;
     },
+
     removeItem(removedBook: T) {
       state.selectedItems = state.selectedItems.filter(
         (book) => book !== removedBook
