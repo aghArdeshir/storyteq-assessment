@@ -6,3 +6,5 @@
 
 - instead of `any` in AutoComplete, see if there is any possible way to use type templates on vue components
 - Is it a correct decision to have available options as a state? It does not seem like a wise decision. Check if there is any other workaround
+- close popup with escape
+- close popup with click outside

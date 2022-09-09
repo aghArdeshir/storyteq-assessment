@@ -80,7 +80,7 @@ function onRemoveOption(removedOption: any) {
       Write at least {{ props.minLength }} characters to start searching
     </div>
 
-    <ul>
+    <ul class="autocomplete-popup">
       <li v-if="noMatchFound">No matches found! Try another search term</li>
 
       <li v-for="option in props.availableOptions" :key="option">
@@ -90,6 +90,7 @@ function onRemoveOption(removedOption: any) {
             :value="option"
             @change="onSelectedOptionsChange"
             v-model="state.internal_selectedOptions"
+            style="margin-right: 10px"
           />
           <slot name="checkbox-label" v-bind="{ option }">{{ option }}</slot>
         </label>
@@ -122,6 +123,7 @@ function onRemoveOption(removedOption: any) {
 input[type="text"] {
   font-size: 20px;
   color: white;
+  flex: 1;
 }
 
 .autocomplete-wrapper {
@@ -132,6 +134,7 @@ input[type="text"] {
   display: flex;
   flex-wrap: wrap;
   max-width: 600px;
+  min-width: 300px;
 
   border-bottom: 1px solid gray;
 }
@@ -141,5 +144,10 @@ input[type="text"] {
   background-color: transparent;
   outline: none;
   padding: 10px;
+}
+
+.autocomplete-popup {
+  background-color: blueviolet;
+  box-shadow: 0px 0px 8px black;
 }
 </style>
