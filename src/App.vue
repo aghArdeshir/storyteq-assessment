@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import BooksList from "./components/BooksList.vue";
-import CitiesList from "./components/CitiesList.vue";
+import BooksPicker from "./components/BooksPicker.vue";
+import CitiesPicker from "./components/CitiesPicker.vue";
 </script>
 
 <template>
   <main class="main-division">
     <div>
-      <BooksList />
+      <BooksPicker />
     </div>
 
     <hr />
 
     <div>
-      <CitiesList />
+      <CitiesPicker />
     </div>
   </main>
 </template>
