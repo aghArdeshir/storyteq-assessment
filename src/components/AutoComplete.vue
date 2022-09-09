@@ -46,10 +46,16 @@ const noMatchFound = computed(
 function onRemoveOption(removedOption: any) {
   emit("onRemoveOption", removedOption);
 }
+
+function onKeydown(e: KeyboardEvent) {
+  if (e.key === "Escape") {
+    console.log("ESCAPE PRESSED");
+  }
+}
 </script>
 
 <template>
-  <div class="autocomplete-wrapper">
+  <div class="autocomplete-wrapper" :onkeydown="onKeydown">
     <div class="chips-and-input">
       <div
         v-for="selectedOption in props.selectedOptions"

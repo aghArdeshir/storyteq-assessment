@@ -90,10 +90,10 @@ In order to adhere to the 2-3 hour target time, we _highly_ recommend that you u
 ### Implementation
 
 - [x] If you want to, feel free to use any boilerplate projects and `gulp`, `grunt`, `webpack` that bootstap the project for you, (but we recommend [vue create](https://cli.vuejs.org/guide/creating-a-project.html), as noted above).
-- [ ] If you are using any js processors, **include both source and distribution files**.
+- [x] If you are using any js processors, **include both source and distribution files**.
 - [ ] Add some styles, make it pretty.
 - [x] Do not cheat. There are lots of autocomplete projects out there, we're not interested in those. We want to see **how you think**.
-- [ ] If you want to go above and beyond, by adding additional functionality such as some sort of list view that shows your selected cities or a more advanced autocomplete feel free to, **as long as you still satisfy the original requirements**.
+- [x] If you want to go above and beyond, by adding additional functionality such as some sort of list view that shows your selected cities or a more advanced autocomplete feel free to, **as long as you still satisfy the original requirements**.
 
 ### What we're evaluating
 
