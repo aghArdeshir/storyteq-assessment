@@ -49,8 +49,8 @@ function onRemoveOption(removedOption: any) {
 </script>
 
 <template>
-  <div>
-    <div class="selected-options-chips-container">
+  <div class="autocomplete-wrapper">
+    <div class="chips-and-input">
       <div
         v-for="selectedOption in props.selectedOptions"
         :key="selectedOption"
@@ -66,14 +66,15 @@ function onRemoveOption(removedOption: any) {
           X
         </button>
       </div>
-    </div>
 
-    <input
-      v-model="state.inputText"
-      @input="onInputTextChange"
-      autofocus
-      :placeholder="props.placeholder"
-    />
+      <input
+        type="text"
+        v-model="state.inputText"
+        @input="onInputTextChange"
+        autofocus
+        :placeholder="props.placeholder"
+      />
+    </div>
 
     <div v-if="state.inputText.length < props.minLength">
       Write at least {{ props.minLength }} characters to start searching
@@ -105,6 +106,8 @@ function onRemoveOption(removedOption: any) {
   background-color: lightslategray;
   padding: 5px;
   border-radius: 4px;
+  font-size: 14px;
+  margin: 5px;
 }
 
 .selected-option-chip-remove-button {
@@ -113,11 +116,30 @@ function onRemoveOption(removedOption: any) {
   color: white;
   border-radius: 50%;
   margin-left: 10px;
+  cursor: button;
 }
 
-.selected-options-chips-container {
+input[type="text"] {
+  font-size: 20px;
+  color: white;
+}
+
+.autocomplete-wrapper {
+  font-size: 20px;
+}
+
+.chips-and-input {
   display: flex;
-  flex-direction: row;
-  gap: 20px;
+  flex-wrap: wrap;
+  max-width: 600px;
+
+  border-bottom: 1px solid gray;
+}
+
+.chips-and-input input {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  padding: 10px;
 }
 </style>

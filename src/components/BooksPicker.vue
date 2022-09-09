@@ -31,5 +31,6 @@ import { MIN_CHARACTERS_LENGTH_TO_SEARCH } from "@/constants/constants";
   display: flex;
   flex-direction: column;
   align-items: center;
+  white-space: nowrap;
 }
 </style>
