@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, reactive, watch } from "vue";
+import { OnClickOutside } from "@vueuse/components";
 
 const emit = defineEmits<{
   // disabling eslint because I don't know why it is complaining! it shouldn't!
@@ -65,60 +66,68 @@ function onKeydown(e: KeyboardEvent) {
 }
 
 function onInputFocus() {
-  if (state.inputText.length >= props.minLength){ state.popupIsOpen = true;}
+  if (state.inputText.length >= props.minLength) {
+    state.popupIsOpen = true;
+  }
+}
+
+function onClickOutside() {
+  state.popupIsOpen = false;
 }
 </script>
 
 <template>
-  <div class="autocomplete-wrapper" :onkeydown="onKeydown">
-    <div class="chips-and-input">
-      <div
-        v-for="selectedOption in props.selectedOptions"
-        :key="selectedOption"
-        class="selected-option-chip"
-      >
-        <slot name="selected-option-chip" v-bind="{ selectedOption }">
-          {{ selectedOption }}
-        </slot>
-        <button
-          class="selected-option-chip-remove-button"
-          @click="onRemoveOption(selectedOption)"
+  <OnClickOutside @trigger="onClickOutside">
+    <div class="autocomplete-wrapper" :onkeydown="onKeydown">
+      <div class="chips-and-input">
+        <div
+          v-for="selectedOption in props.selectedOptions"
+          :key="selectedOption"
+          class="selected-option-chip"
         >
-          X
-        </button>
+          <slot name="selected-option-chip" v-bind="{ selectedOption }">
+            {{ selectedOption }}
+          </slot>
+          <button
+            class="selected-option-chip-remove-button"
+            @click="onRemoveOption(selectedOption)"
+          >
+            X
+          </button>
+        </div>
+
+        <input
+          type="text"
+          v-model="state.inputText"
+          @input="onInputTextChange"
+          @focus="onInputFocus"
+          autofocus
+          :placeholder="props.placeholder"
+        />
       </div>
 
-      <input
-        type="text"
-        v-model="state.inputText"
-        @input="onInputTextChange"
-        @focus="onInputFocus"
-        autofocus
-        :placeholder="props.placeholder"
-      />
+      <div v-if="state.inputText.length < props.minLength">
+        Write at least {{ props.minLength }} characters to start searching
+      </div>
+
+      <ul class="autocomplete-popup" v-if="state.popupIsOpen">
+        <li v-if="noMatchFound">No matches found! Try another search term</li>
+
+        <li v-for="option in props.availableOptions" :key="option">
+          <label>
+            <input
+              type="checkbox"
+              :value="option"
+              @change="onSelectedOptionsChange"
+              v-model="state.internal_selectedOptions"
+              style="margin-right: 10px"
+            />
+            <slot name="checkbox-label" v-bind="{ option }">{{ option }}</slot>
+          </label>
+        </li>
+      </ul>
     </div>
-
-    <div v-if="state.inputText.length < props.minLength">
-      Write at least {{ props.minLength }} characters to start searching
-    </div>
-
-    <ul class="autocomplete-popup" v-if="state.popupIsOpen">
-      <li v-if="noMatchFound">No matches found! Try another search term</li>
-
-      <li v-for="option in props.availableOptions" :key="option">
-        <label>
-          <input
-            type="checkbox"
-            :value="option"
-            @change="onSelectedOptionsChange"
-            v-model="state.internal_selectedOptions"
-            style="margin-right: 10px"
-          />
-          <slot name="checkbox-label" v-bind="{ option }">{{ option }}</slot>
-        </label>
-      </li>
-    </ul>
-  </div>
+  </OnClickOutside>
 </template>
 
 <style scoped>
